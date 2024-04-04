@@ -1,11 +1,20 @@
 package com.bcit.triviabytes.data
 
-data class TriviaQuestion(
-    val id: String,
-    val question: String,
-    val options: List<TriviaOption>
+import com.google.gson.annotations.SerializedName
+
+data class TriviaSet(
+    @SerializedName("response_code")
+    val response: Int,
+    val results: List<TriviaQuestion>
 )
 
-data class TriviaOption(
-    val answer: String
+data class TriviaQuestion(
+    val type: String,
+    val difficulty: String,
+    val category: String,
+    val question: String,
+    @SerializedName("correct_answer")
+    val correctAnswer: String,
+    @SerializedName("incorrect_answers")
+    val incorrectAnswers: List<String>
 )
