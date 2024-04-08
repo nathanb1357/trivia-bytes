@@ -4,10 +4,9 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.bcit.triviabytes.data.TriviaState
 
 @Composable
-fun MainContent(triviaState: TriviaState) {
+fun MainContent(triviaState: TriviaState, configState: ConfigState) {
     val navController = rememberNavController()
 
     NavHost(
@@ -16,7 +15,7 @@ fun MainContent(triviaState: TriviaState) {
     ) {
         // Config Menu
         composable("config") {
-            ConfigScreen(navController)
+            ConfigScreen(navController, configState.strAmount, configState.onAmountChange)
         }
 
         // Trivia Menu
