@@ -8,12 +8,6 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -22,29 +16,8 @@ import com.bcit.triviabytes.ui.states.TriviaState
 
 @Composable
 fun TriviaScreen(navController: NavController, triviaState: TriviaState) {
-    var currentQuestionIndex by remember { mutableIntStateOf(0) }
-    val currentQuestion = triviaState.questions.getOrNull(currentQuestionIndex)
+    val currentQuestion = triviaState.questions.getOrNull(triviaState.currentQuestionIndex.intValue)
     val currentAnswers = currentQuestion?.let { triviaState.getAnswers(it) } ?: emptyList()
-    var answerSelected by remember { mutableStateOf(false) }
-    var currentScore by remember { mutableIntStateOf(0) }
-    val maxScore = triviaState.questions.size
-
-    val isCorrect: (String) -> Boolean = {
-        answerSelected = true
-        if (it == currentQuestion?.correctAnswer) {
-            currentScore++
-            true
-        } else false
-    }
-
-    fun moveToNextQuestion() {
-        if (currentQuestionIndex < maxScore - 1) {
-            answerSelected = false
-            currentQuestionIndex++
-        } else {
-            navController.navigate("results/$currentScore")
-        }
-    }
 
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -59,20 +32,20 @@ fun TriviaScreen(navController: NavController, triviaState: TriviaState) {
             }
         } else {
             Column {
-                Text("Score: $currentScore")
+                Text("Score: ${triviaState.actualScore.intValue}")
                 Text(currentQuestion?.question ?: "")
 
                 currentAnswers.forEach {
                     TriviaAnswer(
                         text = it,
-                        onClick = isCorrect,
-                        answerSelected = answerSelected
+                        onClick = triviaState.isCorrect,
+                        answerSelected = triviaState.answerSelected.value
                     )
                 }
 
-                if (answerSelected) {
+                if (triviaState.answerSelected.value) {
                     Button(
-                        onClick = { moveToNextQuestion() }
+                        onClick = { triviaState.moveToNextQuestion(navController) }
                     ) {
                         Text("Next")
                     }

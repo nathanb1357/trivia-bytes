@@ -12,13 +12,13 @@ import androidx.navigation.NavController
 import com.bcit.triviabytes.ui.states.TriviaState
 
 @Composable
-fun ResultsScreen(navController: NavController, triviaState: TriviaState, score: Int) {
+fun ResultsScreen(navController: NavController, triviaState: TriviaState) {
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = Color(0xFF281849)
     ) {
         Column {
-            Text("You got $score out of ${triviaState.questions.size}")
+            Text("You got ${triviaState.actualScore.intValue} out of ${triviaState.maxScore.intValue}")
             Button(
                 onClick = { navController.navigate("config") }
             ) {

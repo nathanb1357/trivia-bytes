@@ -18,12 +18,13 @@ fun MainContent(triviaState: TriviaState, configState: ConfigState) {
         navController = navController,
         startDestination = "config"
     ) {
-        // Config Menu
+
+        // Config Screen
         composable("config") {
             ConfigScreen(navController, configState)
         }
 
-        // Trivia Menu
+        // Trivia Screen
         composable(
             route = "trivia/{amount}",
             arguments = listOf(navArgument("amount") { type = NavType.IntType })
@@ -33,13 +34,9 @@ fun MainContent(triviaState: TriviaState, configState: ConfigState) {
             TriviaScreen(navController, triviaState)
         }
 
-        // Results Menu
-        composable(
-            route = "results/{score}",
-            arguments = listOf(navArgument("score") { type = NavType.IntType})
-        ) {
-            val score = it.arguments!!.getInt("score")
-            ResultsScreen(navController, triviaState, score)
+        // Results Screen
+        composable("results") {
+            ResultsScreen(navController, triviaState)
         }
     }
 }
