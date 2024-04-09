@@ -1,4 +1,4 @@
-package com.bcit.triviabytes.ui
+package com.bcit.triviabytes.ui.states
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -13,7 +13,8 @@ class ConfigState {
     val onAmountChange: (String) -> Unit = {
         if (it.isNotEmpty() && it.isDigitsOnly()) {
             val intValue = it.toInt()
-            if (intValue in 1..100) {
+            // Maximum amount of questions per API call
+            if (intValue in 1..50) {
                 strAmount = it
                 intAmount = intValue
             }

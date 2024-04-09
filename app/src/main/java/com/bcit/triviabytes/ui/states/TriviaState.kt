@@ -1,4 +1,4 @@
-package com.bcit.triviabytes.ui
+package com.bcit.triviabytes.ui.states
 
 import androidx.compose.runtime.mutableStateListOf
 import com.bcit.triviabytes.data.TriviaQuestion
@@ -12,5 +12,12 @@ class TriviaState(private val triviaRepo: TriviaRepository) {
             it.clear()
             it.addAll(triviaRepo.getTrivia(amount).results)
         }
+    }
+
+    fun getAnswers(question: TriviaQuestion): List<String> {
+        val answers = mutableListOf(question.correctAnswer)
+        answers.addAll(question.incorrectAnswers)
+        answers.shuffle()
+        return answers
     }
 }

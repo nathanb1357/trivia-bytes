@@ -4,8 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.remember
-import com.bcit.triviabytes.ui.TriviaState
-import com.bcit.triviabytes.ui.ConfigState
+import com.bcit.triviabytes.ui.states.TriviaState
+import com.bcit.triviabytes.ui.states.ConfigState
 import com.bcit.triviabytes.ui.MainContent
 
 class MainActivity: ComponentActivity() {

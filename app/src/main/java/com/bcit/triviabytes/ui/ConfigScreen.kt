@@ -10,13 +10,13 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableIntState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.bcit.triviabytes.ui.states.ConfigState
 
 @Composable
 fun ConfigScreen(navController: NavController, configState: ConfigState) {
@@ -37,7 +37,7 @@ fun ConfigScreen(navController: NavController, configState: ConfigState) {
             TextField(
                 value = configState.strAmount,
                 onValueChange = { configState.onAmountChange(it) },
-                label = { Text("Amount of Questions (1-100)") }
+                label = { Text("Amount of Questions (1-50)") }
             )
             Button(
                 onClick = { navController.navigate("trivia/${configState.intAmount}") }

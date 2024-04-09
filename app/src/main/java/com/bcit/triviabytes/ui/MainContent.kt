@@ -2,14 +2,13 @@ package com.bcit.triviabytes.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.launch
+import com.bcit.triviabytes.ui.states.ConfigState
+import com.bcit.triviabytes.ui.states.TriviaState
 
 @Composable
 fun MainContent(triviaState: TriviaState, configState: ConfigState) {
