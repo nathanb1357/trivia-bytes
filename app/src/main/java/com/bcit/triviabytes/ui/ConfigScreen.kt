@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 
 @Composable
-fun ConfigScreen(navController: NavController, amount: String, onAmountChange: (String) -> Unit) {
+fun ConfigScreen(navController: NavController, configState: ConfigState) {
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = Color(0xFF281849)
@@ -35,10 +35,15 @@ fun ConfigScreen(navController: NavController, amount: String, onAmountChange: (
                 fontSize = 70.sp
             )
             TextField(
-                value = amount,
-                onValueChange = { onAmountChange(it) },
+                value = configState.strAmount,
+                onValueChange = { configState.onAmountChange(it) },
                 label = { Text("Amount of Questions (1-100)") }
             )
+            Button(
+                onClick = { navController.navigate("trivia/${configState.intAmount}") }
+            ) {
+                Text("Start")
+            }
         }
     }
 }

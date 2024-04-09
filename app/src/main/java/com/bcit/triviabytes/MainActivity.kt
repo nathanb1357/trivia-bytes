@@ -7,6 +7,7 @@ import androidx.compose.runtime.remember
 import com.bcit.triviabytes.ui.TriviaState
 import com.bcit.triviabytes.ui.ConfigState
 import com.bcit.triviabytes.ui.MainContent
+import kotlinx.coroutines.coroutineScope
 
 class MainActivity: ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,6 +16,7 @@ class MainActivity: ComponentActivity() {
         setContent {
             val triviaState = remember { TriviaState(triviaRepo) }
             val configState = remember { ConfigState() }
+
             MainContent(triviaState, configState)
         }
     }
