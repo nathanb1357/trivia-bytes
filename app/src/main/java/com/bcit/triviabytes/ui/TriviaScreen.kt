@@ -42,7 +42,7 @@ fun TriviaScreen(navController: NavController, triviaState: TriviaState) {
             answerSelected = false
             currentQuestionIndex++
         } else {
-            navController.navigate("results")
+            navController.navigate("results/$currentScore")
         }
     }
 
@@ -74,14 +74,8 @@ fun TriviaScreen(navController: NavController, triviaState: TriviaState) {
                     Button(
                         onClick = { moveToNextQuestion() }
                     ) {
-
+                        Text("Next")
                     }
-                }
-
-                Button(
-                    onClick = { navController.navigate("config") }
-                ) {
-                    Text("Back")
                 }
             }
         }

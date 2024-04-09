@@ -32,5 +32,14 @@ fun MainContent(triviaState: TriviaState, configState: ConfigState) {
             LaunchedEffect(Unit) { triviaState.getQuestions(amount) }
             TriviaScreen(navController, triviaState)
         }
+
+        // Results Menu
+        composable(
+            route = "results/{score}",
+            arguments = listOf(navArgument("score") { type = NavType.IntType})
+        ) {
+            val score = it.arguments!!.getInt("score")
+            ResultsScreen(navController, triviaState, score)
+        }
     }
 }
