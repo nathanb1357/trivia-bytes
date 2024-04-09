@@ -6,6 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.navigation.NavController
 import com.bcit.triviabytes.data.TriviaQuestion
 import com.bcit.triviabytes.data.TriviaRepository
+import org.jsoup.Jsoup
 
 class TriviaState(private val triviaRepo: TriviaRepository) {
 
@@ -49,7 +50,7 @@ class TriviaState(private val triviaRepo: TriviaRepository) {
     // Returns whether answer is correct
     val isCorrect: (String) -> Boolean = {
         answerSelected.value = true
-        if (it == questions.getOrNull(currentQuestionIndex.intValue)?.correctAnswer) {
+        if (it == Jsoup.parse(questions[currentQuestionIndex.intValue].correctAnswer).text()) {
             actualScore.intValue++
             true
         } else false
